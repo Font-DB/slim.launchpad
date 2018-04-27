@@ -1,0 +1,30 @@
+{
+    "name": "slim/slim-tree",
+    "description": "A Slim Framework scaffolding for rapid development to get up and running in short order.",
+    "keywords": [
+        "microframework",
+        "rest",
+        "router",
+        "psr7"
+    ],
+    "homepage": "https://github.com/phpwalter/slim.launchpad.git",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Walter Torres",
+            "email": "walter@torres.ws",
+            "homepage": "https://www.slimframework.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.6.0",
+        "slim/twig-view": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\"        : "app/",
+            "Controllers\\": "app/Controllers/",
+            "Handlers\\"   : "app/Handlers/"
+        }
+    }
+}
