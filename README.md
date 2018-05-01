@@ -16,12 +16,22 @@ There will be multiple branches on this tree, each representing a more sophistic
 
 Pull down this code, or fork it if you like.
 
-Then run composer update on the composer.json file included.
+The **VENDOR** directory is not in the collection. You will need to run composer update on the composer.json file [included] to create your **VENDOR** directory..
 
-This scaffolding assumes it will be run at the [sub]domian level:
+Run, as ROOT, the SQL script to add a user, DB, table and data
+
+> **ALWAYS** review SQL code before you run it!
+
+This scaffolding assumes it will be run on a virtual domain:
 
   ```
-  http://my.domain.test
-  http://my.domain.test/ping
-  http://my.domain.test/users
+  http://domain.test
+  http://domain.test/ping
+  http://domain.test/users
   ```
+
+
+# Warning
+This is NOT production ready code.
+
+This is simply 1 example (of many) of how to structure a basic CRUD using Slim. 

@@ -12,7 +12,7 @@
 
         protected $view;
 
-        public function __construct (Twig $view) {
+        public function __construct(Twig $view) {
             $this->view = $view;
         }
 
@@ -20,11 +20,11 @@
 
             switch ($this->determineContentType($request)) {
                 case 'application/json':
-                    $output = $this->renderNotFoundJson($response);
+                    $output = $this->renderNotFoundJson($request, $response);
                     break;
 
                 case 'text/html':
-                    $output = $this->renderNotFoundHtml($response);
+                    $output = $this->renderNotFoundHtml($request, $response);
                     break;
             }
 
@@ -32,20 +32,23 @@
 
         }
 
-        protected function renderNotFoundJson (ResponseInterface $response) {
+        protected function renderNotFoundJson (ServerRequestInterface $request, ResponseInterface $response) {
 
-            return $response->withJson(['error' => 'Not Found']);
+            return $response->withJson([
+                'error' => 'Not Found',
+                'path' => (string)$request->getUri()
+            ]);
         }
 
-        protected function renderNotFoundHtml (ResponseInterface $response) {
+        protected function renderNotFoundHtml (ServerRequestInterface $request, ResponseInterface $response) {
 
             return $this->view
-                        ->render($response, 'errors/404.twig')
-                        ->withStatus(404) ;
+                ->render($response, 'errors/404.twig', [
+                    'error' => '404 - Not Found',
+                    'path' => (string)$request->getUri()
+                ])
+                ->withStatus(404);
+
         }
-
-
-
-
     }
 

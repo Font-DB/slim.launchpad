@@ -1,5 +1,6 @@
 <?php
 
+
     use Psr\Container\ContainerInterface;
     use Psr\Http\Message\ServerRequestInterface;
     use Psr\Http\Message\ResponseInterface;
@@ -33,7 +34,26 @@
         return $view;
     };
 
+    // Illuminate DB Library
+    $capsule = new \Illuminate\Database\Capsule\Manager;
+    $capsule->addConnection($container->get('settings')['db']);
+    $capsule->setAsGlobal();
+    $capsule->bootEloquent();
 
+    $container['db'] = function (ContainerInterface $container) use ($capsule) {
+        return $capsule;
+    };
+
+    // monolog
+    $container['logger'] = function ($c) {
+        $settings = $c['settings']['logger'];
+
+        $logger = new Monolog\Logger($settings['name']);
+        $logger->pushProcessor(new Monolog\Processor\UidProcessor());
+        $logger->pushHandler(new Monolog\Handler\StreamHandler($c['settings']['logger']['path'], $c['settings']['level']));
+
+        return $logger;
+    };
 
 // -----------------------------------------------------------------------------
 // Service factories
@@ -48,7 +68,6 @@
 // Action Definitions
 // -----------------------------------------------------------------------------
 
-
     $container['RootController'] = function (ContainerInterface $container) {
         return new \App\Controllers\RootController($container);
     };
@@ -56,3 +75,4 @@
     $container['UserController'] = function (ContainerInterface $container) {
         return new \App\Controllers\UserController($container);
     };
+

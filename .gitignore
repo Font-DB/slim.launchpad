@@ -80,5 +80,5 @@ typings/
 /app/resources/views/cache/*
 
 # Walters Way
-*.conf.lnk
+*.lnk
 

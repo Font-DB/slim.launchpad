@@ -9,6 +9,7 @@
 
     // Change this to reflect your structure
     define('BOOTSTRAP_PATH', APP_PATH . 'bootstrap' . __DS__ );
+    define('MIDDLEWARE_PATH', APP_PATH . 'middleware' . __DS__ );
     define('RESOURCE_PATH', APP_PATH . 'resources' . __DS__ );
     define('ROUTES_PATH', RESOURCE_PATH . 'routes' . __DS__ );
 

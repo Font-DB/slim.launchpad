@@ -1,7 +1,23 @@
 {% extends 'templates/app.twig' %}
 
-{% block title %}404{% endblock %}
+{% block title %} {{ title }}{% endblock %}
 
 {% block content %}
-    404
+
+    <div class="card">
+        <h5 class="card-header">{{ error }}</h5>
+
+        <div class="card-body">
+
+            The resource "{{ path }}" can not be located.
+            <br />
+            Please check your request and try again.
+
+        </div>
+
+        <div class="card-footer">
+            <div class="col text-center"></div>
+        </div>
+    </div>
+
 {% endblock %}
